@@ -79,9 +79,53 @@ print(f"Maximum sum: {max_sum}")  # 700
 # Run all unit tests
 python -m unittest test_max_value_limited_neighbors -v
 
-# Run the example cases
+# Run the main file (includes examples + performance analysis)
 python max_value_limited_neighbors.py
 ```
+
+## Performance Analysis
+
+The main file includes an empirical performance analysis that compares theoretical vs actual running times:
+
+### Methodology
+
+1. **Experimental Phase**: Run the algorithm on various input sizes and measure actual execution times
+2. **Calibration Phase**: Select a middle-scale test case to fit the unit operation time constant `c`
+3. **Theoretical Calculation**: Compute theoretical times using the formula `T(n,k) = c × n × k`
+4. **Comparison**: Calculate error rates between theoretical predictions and experimental results
+
+### Example Output
+
+```
+Step 1: Running experiments and collecting actual data...
+n=10, k=5    → 0.0692ms
+n=100, k=50  → 5.6476ms
+n=1000, k=500 → 643.41ms
+
+Step 2: Calibrating unit operation time constant c...
+Calibration point: n=100, k=50, c = 1.1295 μs
+
+Step 3: Calculating theoretical times and comparing...
+n=100, k=50  → Theory=5.6476ms, Actual=5.6476ms, Error=0.00% *
+n=1000, k=500 → Theory=564.76ms, Actual=643.41ms, Error=13.93%
+
+Complexity Verification:
+Scale grows 10000x → Time grows 9299x
+✓ Confirms O(n×k) complexity
+```
+
+The calibration point (marked with `*`) has 0% error by design, while other points show how well the O(n×k) model fits the actual behavior.
+
+### Visualization
+
+The analysis generates a log-log plot comparing theoretical and actual running times:
+
+![Performance Analysis](performance_analysis.png)
+
+The plot shows:
+- **Blue line with circles**: Theoretical running time based on O(n×k) complexity
+- **Red dashed line with squares**: Actual measured running time
+- Both curves closely follow each other, confirming the O(n×k) time complexity
 
 ## Files
 
@@ -93,6 +137,6 @@ python max_value_limited_neighbors.py
 
 - Guarantees global optimal solution
 - Handles all edge cases (k=0, k>n, empty arrays)
-- Efficient O(n*k) time complexity
+- Efficient O(nk) time complexity
 - Includes solution verification and backtracking
 - Full test coverage with 22 unit tests
