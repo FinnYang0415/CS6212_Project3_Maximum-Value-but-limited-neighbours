@@ -93,6 +93,6 @@ python max_value_limited_neighbors.py
 
 - Guarantees global optimal solution
 - Handles all edge cases (k=0, k>n, empty arrays)
-- Efficient O(nk) time complexity
+- Efficient O(n*k) time complexity
 - Includes solution verification and backtracking
 - Full test coverage with 22 unit tests
